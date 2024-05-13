@@ -42,7 +42,7 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
  
       - name: Tag Image
-        run: docker tag imgamal ${{ secrets.DOCKERHUB_USERNAME }}/imgamal:latest 
+        run: docker tag imgamal amalsayed/imgamal:latest 
  
       - name: Push Image to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/imgamal:latest
+        run: docker push amalsayed/imgamal:latest

@@ -20,4 +20,4 @@ jobs:
         with:
           context: DockerFileFolder/
           push: true
-          tags: amal/demo1:latest
+          tags: amal/demo:latest

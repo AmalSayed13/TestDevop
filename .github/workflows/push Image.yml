@@ -1,6 +1,7 @@
 name: Build and Push Docker Image to Docker Hub
 
 on: push
+
 jobs:
   push_to_registry:
     name: push docker image to hub
@@ -20,4 +21,4 @@ jobs:
         with:
           context: DockerFileFolder/
           push: true
-          tags: amal/demo:latest
+          tags: amal/demo1:latest

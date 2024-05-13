@@ -1,25 +1,26 @@
 name: Build and Push Docker Image
 
-on:
-  push:
-    branches:
-      - main  
-
+on: 
+    workflow_dispatch:
+    push:
+      branches:
+        - main
+      
 jobs:
-  build_and_push:
-    runs-on: ubuntu-latest
+    first:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v2  
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  
+          - name: Log in to Docker Hub
+            uses: docker/login-action@v2
+            with:
+              username: ${{ secrets.DOCKERHUB_USERNAME }}
+              password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          - name: Build Docker image
+            run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ImgAmal:latest .
 
-      - name: Build and push Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ImgAmal:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ImgAmal:latest
+          - name: push Docker image
+            run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ImgAmal:latest
